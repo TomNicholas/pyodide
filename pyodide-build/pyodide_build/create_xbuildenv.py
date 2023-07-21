@@ -2,12 +2,12 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from .common import (
-    exit_with_stdio,
+from .build_env import (
     get_build_flag,
     get_pyodide_root,
     get_unisolated_packages,
 )
+from .common import exit_with_stdio
 from .logger import logger
 from .recipe import load_all_recipes
 
@@ -57,6 +57,7 @@ def _copy_wasm_libs(
         Path("dist/pyodide-lock.json"),
         Path("dist/python"),
         Path("dist/python_stdlib.zip"),
+        Path("tools/constraints.txt"),
     ]
     to_copy.extend(
         x.relative_to(pyodide_root) for x in (pyodide_root / "dist").glob("pyodide.*")
